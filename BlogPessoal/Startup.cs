@@ -41,23 +41,27 @@ namespace BlogPessoal
             services.AddScoped<ITheme, ThemeRepository>();
             services.AddScoped<IPost, PostRepository>();
 
-            // Configuração Controladores
+            // Controladores
+            services.AddCors();
             services.AddControllers();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlogPessoalContext context)
         {
+            // Ambiente de desenvolvimento
             if (env.IsDevelopment())
             {
                 context.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
-            }
+            } 
 
-            app.UseRouting();
+            // Ambiente de produção
+            //Rotas
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 
-            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
