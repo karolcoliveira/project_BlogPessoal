@@ -10,8 +10,10 @@ namespace BlogPessoal.src.dtos
     /// </summary>
     public class AddUserDTO
     {
+        private (string, string, string, string) p;
+
         [Required, StringLength(50)]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [Required, StringLength(30)]
         public string Email { get; set; }
@@ -21,12 +23,17 @@ namespace BlogPessoal.src.dtos
 
         public string Photo { get; set; }
 
-        public AddUserDTO(string username, string email, string password, string photo)
+        public AddUserDTO(string name, string email, string password, string photo)
         {
-            UserName = username;
+            Name = name;
             Email = email;
             Password = password;
             Photo = photo;
+        }
+
+        public AddUserDTO((string, string, string, string) p)
+        {
+            this.p = p;
         }
     }
     /// <summary>
@@ -37,17 +44,21 @@ namespace BlogPessoal.src.dtos
     /// </summary>
     public class UpdateUserDTO
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(50)]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [Required, StringLength(30)]
         public string Password { get; set; }
 
         public string Photo { get; set; }
 
-        public UpdateUserDTO(string username, string password, string photo)
+        public UpdateUserDTO(int id, string name, string password, string photo)
         {
-            UserName = username;
+            Id = id;
+            Name = name;
             Password = password;
             Photo = photo;
         }

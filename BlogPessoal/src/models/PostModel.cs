@@ -16,6 +16,9 @@ namespace BlogPessoal.src.models
         [Required, StringLength(100)]
         public string Description { get; set; }
 
+        [Required, StringLength(100)]
+        public string DescriptionTheme { get; set; }
+
         public string Photo { get; set; }
 
         [ForeignKey("fk_user")]

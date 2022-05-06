@@ -13,7 +13,7 @@ namespace BlogPessoal.src.models
         public int Id { get; set; }
 
         [Required, StringLength(50)]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [Required, StringLength(30)]
         public string Email { get; set; }

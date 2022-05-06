@@ -11,10 +11,11 @@ namespace BlogPessoal.src.repositories
 /// </summary>
     public interface ITheme
     { 
-        void AddNewTheme(AddThemeDTO theme);
-        void  UpdateNewTheme(UpdateThemeDTO theme);
-        void DeleteTheme(int themeId);
-        ThemeModel GetThemeById(int Id);
+        void AddTheme(AddThemeDTO theme);
+        void  UpdateTheme(UpdateThemeDTO theme);
+        void DeleteTheme(int id);
+        ThemeModel GetThemeById(int id);
+        List<ThemeModel> GetAllThemes(int id);
         List<ThemeModel> GetThemeByDescription(string description);
     }
 }

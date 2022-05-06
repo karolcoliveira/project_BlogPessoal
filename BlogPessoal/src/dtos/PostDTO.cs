@@ -10,6 +10,9 @@ namespace BlogPessoal.src.dtos
 /// </summary>
     public class AddPostDTO
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(30)]
         public string Title { get; set; }
 
@@ -30,7 +33,7 @@ namespace BlogPessoal.src.dtos
             Description = description;
             Photo = photo;
             EmailCreator = emailCreator;
-            Description = descriptionTheme;
+            DescriptionTheme = descriptionTheme;
         }
     }
     /// <summary>
@@ -41,11 +44,14 @@ namespace BlogPessoal.src.dtos
     /// </summary>
     public class UpdatePostDTO
     {
+        [Required]
+        public int Id { get; set; }
+
+        [Required, StringLength(20)]
+        public string Description { get; set; }
+
         [Required, StringLength(30)]
         public string Title { get; set; }
-
-        [Required, StringLength(100)]
-        public string Description { get; set; }
 
         public string Photo { get; set; }
 
@@ -55,13 +61,14 @@ namespace BlogPessoal.src.dtos
         [Required]
         public string DescriptionTheme { get; set; }
 
-        public UpdatePostDTO(string title, string descricao, string photo, string emailCreator, string descriptionTheme)
+        public UpdatePostDTO(string title, string description, string photo, string emailCreator, string descriptionTheme)
         {
+  
             Title = title;
-            Description = descricao;
+            Description = description;
             Photo = photo;
             EmailCreator = emailCreator;
-            Description = descriptionTheme;
+            DescriptionTheme = descriptionTheme;
         }
     }
 }

@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BlogPessoal.src.data;
+using BlogPessoal.src.repositories;
+using BlogPessoal.src.repositories.implements;
 
 namespace BlogPessoal
 {
@@ -33,6 +35,11 @@ namespace BlogPessoal
                 .Build();
 
             services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
+            // Repositorios
+            services.AddScoped<IUser, UserRepository>();
+            services.AddScoped<ITheme, ThemeRepository>();
+            services.AddScoped<IPost, PostRepository>();
 
             // Configuração Controladores
             services.AddControllers();

@@ -29,7 +29,7 @@ namespace BlogPessoalTeste.Tests.data
         {
             UserModel user = new UserModel();
 
-            user.UserName = "Karol Oliveira";
+            user.Name = "Karol Oliveira";
             user.Email = "karol@email.com";
             user.Password = "134652";
             user.Photo = "AKITAOLINKDAFOTO";
