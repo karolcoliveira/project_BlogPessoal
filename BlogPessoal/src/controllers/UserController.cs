@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlogPessoal.src.controllers
 {
     [ApiController]
-    [Route("api/users")]
+    [Route("api/Users")]
     [Produces("application/json")]
     public class UserController : ControllerBase
     {
@@ -57,6 +57,14 @@ namespace BlogPessoal.src.controllers
 
             if (user == null) return NotFound();
             return Ok(user);
+        }
+
+        [HttpGet]
+        public IActionResult GetUserByName([FromQuery] string nameUser)
+        {
+            var users = _repository.GetUserByName(nameUser);
+            if (users.Count < 1) return NoContent();
+            return Ok(users);
         }
 
         [HttpGet("email/{emailUser}")]

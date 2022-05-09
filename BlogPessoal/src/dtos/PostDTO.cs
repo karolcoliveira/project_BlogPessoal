@@ -45,7 +45,7 @@ namespace BlogPessoal.src.dtos
     public class UpdatePostDTO
     {
         [Required]
-        public int Id { get; set; }
+        public int Id{ get; set; }
 
         [Required, StringLength(20)]
         public string Description { get; set; }
@@ -61,14 +61,18 @@ namespace BlogPessoal.src.dtos
         [Required]
         public string DescriptionTheme { get; set; }
 
-        public UpdatePostDTO(string title, string description, string photo, string emailCreator, string descriptionTheme)
+        public UpdatePostDTO(int id, string title, string description, string photo, string emailCreator, string descriptionTheme)
         {
-  
+            Id= id;
             Title = title;
             Description = description;
             Photo = photo;
             EmailCreator = emailCreator;
             DescriptionTheme = descriptionTheme;
+        }
+
+        public UpdatePostDTO(int v1, string v2, string v3, string v4, string v5)
+        {
         }
     }
 }

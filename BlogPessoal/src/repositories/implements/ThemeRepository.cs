@@ -35,7 +35,7 @@ namespace BlogPessoal.src.repositories.implements
             _context.SaveChanges();
         }
 
-        public List<ThemeModel> GetAllThemes(int id)
+        public List<ThemeModel> GetAllThemes()
         {
             return _context.Themes.ToList();
         }
@@ -55,7 +55,7 @@ namespace BlogPessoal.src.repositories.implements
         {
             var oldTheme = GetThemeById(theme.Id);
             oldTheme.Description = theme.Description;
-            _context.Themes.Add(oldTheme);
+            _context.Themes.Update(oldTheme);
             _context.SaveChanges();
         }
         #endregion Methods

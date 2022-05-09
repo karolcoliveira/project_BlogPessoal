@@ -54,10 +54,12 @@ namespace BlogPessoal
             {
                 context.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
-            } 
+            }
 
             // Ambiente de produção
             //Rotas
+            app.UseRouting();
+            app.UseCors(c => c
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());

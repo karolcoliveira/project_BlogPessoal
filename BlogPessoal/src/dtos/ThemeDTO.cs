@@ -9,9 +9,12 @@ namespace BlogPessoal.src.dtos
 /// </summary>
 public class AddThemeDTO
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(20)]
         public string Description { get; set; }
-        public AddThemeDTO(string description)
+        public AddThemeDTO( string description)
         {
             Description = description;
         }
@@ -29,8 +32,9 @@ public class AddThemeDTO
 
         [Required, StringLength(20)]
         public string Description { get; set; }
-        public UpdateThemeDTO(string description)
+        public UpdateThemeDTO(int id, string description)
         {
+            Id = id;
             Description = description;
 
         }

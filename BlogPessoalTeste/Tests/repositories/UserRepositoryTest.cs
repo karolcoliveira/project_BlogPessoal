@@ -14,20 +14,18 @@ namespace BlogPessoalTeste.Tests.repositories
 		private BlogPessoalContext _context;
 		private IUser _repository;
 
-		[TestInitialize]
-		public void InitialSetting()
+
+		[TestMethod]
+		public void CreateFourUsersIntoDatabaseReturnFourUsers()
 		{
+			// Definindo contexto
 			var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
 			.UseInMemoryDatabase(databaseName: "db_blogpessoal")
 			.Options;
 
 			_context = new BlogPessoalContext(opt);
 			_repository = new UserRepository(_context);
-		}
 
-		[TestMethod]
-		public void CreateFourUsersIntoDatabaseReturnFourUsers()
-		{
 			//GIVEN - Dado que registro 4 usuarios no banco
 
 			_repository.AddUser(
@@ -67,6 +65,14 @@ namespace BlogPessoalTeste.Tests.repositories
 		[TestMethod]
 		public  void GetUserByEmailReturnNotNull()
 		{
+			// Definindo contexto
+			var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
+			.UseInMemoryDatabase(databaseName: "db_blogpessoal1")
+			.Options;
+
+			_context = new BlogPessoalContext(opt);
+			_repository = new UserRepository(_context);
+
 			//GIVEN - Dado que registro um usuario no banco
 
 			_repository.AddUser(
@@ -86,6 +92,14 @@ namespace BlogPessoalTeste.Tests.repositories
 		[TestMethod]
 		public  void GetUserByIdReturnNotNullName()
 		{
+			// Definindo contexto
+			var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
+			.UseInMemoryDatabase(databaseName: "db_blogpessoal2")
+			.Options;
+
+			_context = new BlogPessoalContext(opt);
+			_repository = new UserRepository(_context);
+
 			//GIVEN - Dado que registro um usuario no banco
 			_repository.AddUser(
 				new AddUserDTO(
@@ -95,7 +109,7 @@ namespace BlogPessoalTeste.Tests.repositories
 				"URLFOTO"));
 
 			//WHEN - Quando pesquiso pelo id 6
-			var user = _repository.GetUserById(6);
+			var user = _repository.GetUserById(1);
 
 			//THEN - Então, deve me retornar um elemento não nulo
 			Assert.IsNotNull(user);
@@ -107,29 +121,36 @@ namespace BlogPessoalTeste.Tests.repositories
 			[TestMethod]
 			public void UpdateUserReturnUpdatedUser()
 			{
+				// Definindo contexto
+				var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
+				.UseInMemoryDatabase(databaseName: "db_blogpessoal3")
+				.Options;
+
+				_context = new BlogPessoalContext(opt);
+				_repository = new UserRepository(_context);
 				//GIVEN - Dado que registro um usuario no banco
 				_repository.AddUser(
-					new AddUserDTO(
-					"Estefânia Boaz",
-					"estefania@email.com",
-					"134652",
-					"URLFOTO"));
+						new AddUserDTO(
+						"Estefânia Boaz",
+						"estefania@email.com",
+						"134652",
+						"URLFOTO"));
 
-			//WHEN - Quando atualizamos o usuario
-			var old = _repository.GetUserByEmail("estefania@email.com");
-				_repository.UpdateUser(
-					new UpdateUserDTO(7,
-					"Estefânia Moura",
-					"123456",
-					"URLFOTONOVA"));
+				//WHEN - Quando atualizamos o usuario
+				var old = _repository.GetUserByEmail("estefania@email.com");
+					_repository.UpdateUser(
+						new UpdateUserDTO(1,
+						"Estefânia Moura",
+						"123456",
+						"URLFOTONOVA"));
 
-			// THEN - Então, quando validamos pesquisa deve retornar nome Estefânia Moura
+				// THEN - Então, quando validamos pesquisa deve retornar nome Estefânia Moura
 
-			Assert.AreEqual("Estefânia Moura", _context.Users.FirstOrDefault(u => u.Id == old.Id).Name);
+				Assert.AreEqual("Estefânia Moura", _context.Users.FirstOrDefault(u => u.Id == old.Id).Name);
 
-			//THEN - Então, quando validamos pesquisa deve retornar senha 123456
+				//THEN - Então, quando validamos pesquisa deve retornar senha 123456
 
-			Assert.AreEqual("123456", _context.Users.FirstOrDefault(u => u.Id == old.Id).Password);
+				Assert.AreEqual("123456", _context.Users.FirstOrDefault(u => u.Id == old.Id).Password);
 			}
 	}
 }
