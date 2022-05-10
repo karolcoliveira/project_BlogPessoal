@@ -4,6 +4,7 @@ using BlogPessoal.src.data;
 using BlogPessoal.src.models;
 using System.Linq;
 using System;
+using BlogPessoal.src.utilities;
 
 namespace BlogPessoalTeste.Tests.data
 
@@ -33,6 +34,7 @@ namespace BlogPessoalTeste.Tests.data
             user.Email = "karol@email.com";
             user.Password = "134652";
             user.Photo = "AKITAOLINKDAFOTO";
+            user.Type = TypeUser.NORMAL;
 
             _context.Users.Add(user); // Adicionando usuario
 

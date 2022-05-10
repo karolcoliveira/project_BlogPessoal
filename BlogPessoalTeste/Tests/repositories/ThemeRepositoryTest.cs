@@ -71,7 +71,7 @@ namespace BlogPessoalTeste.Tests.repositories
             .UseInMemoryDatabase(databaseName: "db_blogpessoal12")
             .Options;
 
-            // Given that I added 4 uthemes into database
+            // Given that I added 4 themes into database
             _repository.AddTheme(new AddThemeDTO("SuperJunior"));
             _repository.AddTheme(new AddThemeDTO("SHINee"));
             _repository.AddTheme(new AddThemeDTO("Shinee"));

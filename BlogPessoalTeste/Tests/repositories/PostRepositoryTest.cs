@@ -5,6 +5,7 @@ using BlogPessoal.src.repositories;
 using BlogPessoal.src.repositories.implements;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BlogPessoal.src.utilities;
 
 
 namespace BlogPessoalTeste.Tests.repositories
@@ -38,14 +39,16 @@ namespace BlogPessoalTeste.Tests.repositories
                     "Cho Kyuhyun",
                     "kyuhyun@email",
                     "200288",
-                    "URLPHOTO"));
+                    "URLPHOTO",
+                    TypeUser.NORMAL));
 
             _repositoryU.AddUser(
                 new AddUserDTO(
                     "Lee Donghae",
                     "haefish@email",
                     "121086",
-                    "URLPHOTO"));
+                    "URLPHOTO",
+                    TypeUser.NORMAL));
 
             _repositoryT.AddTheme(new AddThemeDTO("SuperJunior"));
             _repositoryT.AddTheme(new AddThemeDTO("Shinee"));
@@ -103,14 +106,16 @@ namespace BlogPessoalTeste.Tests.repositories
                     "Cho Kyuhyun",
                     "kyuhyun@email",
                     "200288",
-                    "URLPHOTO"));
+                    "URLPHOTO",
+                    TypeUser.NORMAL));
 
             _repositoryU.AddUser(
                 new AddUserDTO(
                     "Lee Donghae",
                     "haefish@email",
                     "121086",
-                    "URLPHOTO"));
+                    "URLPHOTO",
+                    TypeUser.NORMAL));
 
             _repositoryT.AddTheme(new AddThemeDTO("SuperJunior"));
             _repositoryT.AddTheme(new AddThemeDTO("Shinee"));
@@ -184,14 +189,16 @@ namespace BlogPessoalTeste.Tests.repositories
                     "Cho Kyuhyun",
                     "kyuhyun@email",
                     "200288",
-                    "URLPHOTO"));
+                    "URLPHOTO",
+                    TypeUser.NORMAL));
 
             _repositoryU.AddUser(
                 new AddUserDTO(
                     "Lee Donghae",
                     "haefish@email",
                     "121086",
-                    "URLPHOTO"));
+                    "URLPHOTO",
+                    TypeUser.NORMAL));
 
             _repositoryT.AddTheme(new AddThemeDTO("SuperJunior"));
             _repositoryT.AddTheme(new AddThemeDTO("Shinee"));
