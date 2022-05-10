@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using BlogPessoal.src.utilities;
 
 namespace BlogPessoal.src.models
 {
@@ -22,6 +23,9 @@ namespace BlogPessoal.src.models
         public string Password { get; set; }
 
         public string Photo { get; set; }
+
+        [Required]
+        public TypeUser Type { get; set; }
 
         [JsonIgnore]
         public List<PostModel> MyPosts { get; set; }
