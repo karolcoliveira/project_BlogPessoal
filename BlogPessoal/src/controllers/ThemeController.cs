@@ -1,5 +1,6 @@
 ﻿using BlogPessoal.src.dtos;
 using BlogPessoal.src.repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPessoal.src.controllers
@@ -18,6 +19,7 @@ namespace BlogPessoal.src.controllers
         #region Methods
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetAllThemes()
         {
             var list = _repository.GetAllThemes();
@@ -26,6 +28,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpGet("id/{idTheme}")]
+        [Authorize]
         public IActionResult GetThemeById([FromRoute] int idTheme)
         {
             var theme = _repository.GetThemeById(idTheme);
@@ -34,6 +37,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetThemeByDescription([FromQuery] string descriptionTheme)
         {
             var themes = _repository.GetThemeByDescription(descriptionTheme);
@@ -42,6 +46,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddTheme([FromBody] AddThemeDTO theme)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -50,6 +55,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "ADMINISTRATOR")]
         public IActionResult UpdateTheme([FromBody] UpdateThemeDTO theme)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -58,6 +64,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpDelete("delete/{idTheme}")]
+        [Authorize(Roles = "ADMINISTRATOR")]
         public IActionResult DeleteTheme([FromRoute] int idTheme)
         {
             _repository.DeleteTheme(idTheme);

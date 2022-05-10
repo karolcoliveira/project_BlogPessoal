@@ -1,5 +1,6 @@
 ﻿using BlogPessoal.src.dtos;
 using BlogPessoal.src.repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPessoal.src.controllers
@@ -9,7 +10,7 @@ namespace BlogPessoal.src.controllers
     [Produces("application/json")]
     public class PostController : ControllerBase
     {
-        #region Atibutes
+        #region Atributes
 
         private readonly IPost _repository;
 
@@ -17,7 +18,6 @@ namespace BlogPessoal.src.controllers
 
         #region Constructors
 
-      
         public PostController (IPost repository)
         {
             _repository = repository;
@@ -27,6 +27,7 @@ namespace BlogPessoal.src.controllers
         #region Methods
 
         [HttpGet("id/{idPost}")]
+        [Authorize]
         public IActionResult GetPostById([FromRoute] int idPost)
         {
             var post = _repository.GetPostById(idPost);
@@ -35,6 +36,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetAllPosts()
         {
             var list = _repository.GetAllPosts();
@@ -43,6 +45,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetAllPostBySearch(
             [FromQuery] string title,
             [FromQuery] string descriptionTheme,
@@ -55,6 +58,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddPost([FromBody] AddPostDTO post)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -64,6 +68,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpPut]
+        [Authorize]
         public IActionResult UpdatePost([FromBody] UpdatePostDTO post)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -72,6 +77,7 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpDelete("delete/{idPost}")]
+        [Authorize]
         public IActionResult DeletePost([FromRoute] int idPost)
         {
             _repository.DeletePost(idPost);
