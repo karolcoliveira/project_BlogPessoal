@@ -1,9 +1,12 @@
-﻿using BlogPessoal.src.dtos;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using BlogPessoal.src.dtos;
 using BlogPessoal.src.repositories;
 using BlogPessoal.src.services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
+using BlogPessoal.src.utilities;
 
 namespace BlogPessoal.src.controllers
 {
@@ -21,10 +24,10 @@ namespace BlogPessoal.src.controllers
 
         #region Constructors
 
-        public UserController(IUser repository, IAuthentication services)
+        public UserController(IUser repository, IAuthentication service)
 
         { _repository = repository;
-          _services = services;
+          _services = service;
         }
 
         #endregion Constructors
@@ -33,66 +36,70 @@ namespace BlogPessoal.src.controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult AddUser([FromBody] AddUserDTO user)
+        public async Task<ActionResult> AddUser([FromBody] AddUserDTO user)
         {
-            if(!ModelState.IsValid) return BadRequest(user);
+            if(!ModelState.IsValid) return BadRequest();
 
             try
             {
-                _services.AddUserWithoutDuplicate(user);
+                await _services.AddUserWithoutDuplicateAsync(user);
                 return Created($"api/Users/email/{user.Email}", user);
             }
             catch (Exception ex)
             { 
                 return Unauthorized(ex.Message); 
             }
-
         }
+
 
         [HttpPut]
         [Authorize(Roles = "NORMAL,ADMINISTRATOR")]
-        public IActionResult UpdateUser([FromBody] UpdateUserDTO user)
+        public async Task<ActionResult> UpdateUser([FromBody] UpdateUserDTO user)
         {
             if (!ModelState.IsValid) return BadRequest(user);
 
             user.Password = _services.CodifyPassword(user.Password);
 
-            _repository.UpdateUser(user);
+            await  _repository.UpdateUserAsync(user);
             return Ok(user);
         }
 
+
         [HttpDelete("delete/{idUser}")]
         [Authorize(Roles ="ADMINISTRATOR")]
-        public IActionResult DeleteUser([FromRoute] int idUser)
+        public async Task<ActionResult> DeleteUser([FromRoute] int idUser)
         {
-            _repository.DeleteUser(idUser);
+            await  _repository.DeleteUserAsync(idUser);
             return NoContent();
         }
 
+
         [HttpGet("id/{user}")]
         [Authorize(Roles = "NORMAL,ADMINISTRATOR")]
-        public IActionResult GetUserById([FromRoute] int iduser)
+        public async Task<ActionResult> GetUserByIdAsync([FromRoute] int iduser)
         {
-            var user = _repository.GetUserById(iduser);
+            var user = await _repository.GetUserByIdAsync(iduser);
 
             if (user == null) return NotFound();
             return Ok(user);
         }
 
+
         [HttpGet]
         [Authorize(Roles = "NORMAL,ADMINISTRATOR")]
-        public IActionResult GetUserByName([FromQuery] string nameUser)
+        public async Task<ActionResult> GetUserByNameAsync([FromQuery] string nameUser)
         {
-            var users = _repository.GetUserByName(nameUser);
+            var users = await _repository.GetUserByNameAsync(nameUser);
             if (users.Count < 1) return NoContent();
             return Ok(users);
         }
 
+
         [HttpGet("email/{emailUser}")]
-        [Authorize(Roles = "NORMAL,ADMINISTRATOR")]
-        public IActionResult GetUserByEmail([FromRoute] string emailUser)
+        [Authorize(Roles = "NORMAL, ADMINISTRATOR")]
+        public async Task<ActionResult> GetUserByEmailAsync([FromRoute] string emailUser)
         {
-            var user = _repository.GetUserByEmail(emailUser);
+            var user = await _repository.GetUserByEmailAsync(emailUser);
 
             if (user == null) return NotFound();
 

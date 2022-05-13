@@ -35,12 +35,8 @@ namespace BlogPessoal.src.dtos
             Photo = photo;
             Type = type;
         }
-
-        public AddUserDTO((string, string, string, string) p)
-        {
-            this.p = p;
-        }
     }
+
     /// <summary>
     /// <para>Sumary: Mirror class to update an user</para>
     /// <para>Created by: Karol Oliveira</para>

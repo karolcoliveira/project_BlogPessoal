@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using BlogPessoal.src.data;
 using BlogPessoal.src.dtos;
 using BlogPessoal.src.repositories;
@@ -15,9 +16,8 @@ namespace BlogPessoalTeste.Tests.repositories
 		private BlogPessoalContext _context;
 		private IUser _repository;
 
-
 		[TestMethod]
-		public void CreateFourUsersIntoDatabaseReturnFourUsers()
+		public async Task CreateFourUsersIntoDatabaseReturnFourUsers()
 		{
 			// Defining context
 			var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
@@ -28,46 +28,25 @@ namespace BlogPessoalTeste.Tests.repositories
 			_repository = new UserRepository(_context);
 
 			// Given that I added 4 users into database
-			_repository.AddUser(
-				new AddUserDTO(
-					"Cho Kyuhyun",
-					"kyuhyun@email",
-					"200288",
-					"URLPHOTO",
-					TypeUser.NORMAL));
+			await _repository.AddUserAsync(
+				new AddUserDTO("Cho Kyuhyun", "kyuhyun@email", "200288", "URLPHOTO",TypeUser.NORMAL));
 
-			_repository.AddUser(
-				new AddUserDTO(
-					"Lee Donghae",
-					"haefish@email",
-					"121086",
-					"URLPHOTO",
-					TypeUser.NORMAL));
+			await _repository.AddUserAsync(
+				new AddUserDTO("Lee Donghae", "haefish@email", "121086", "URLPHOTO", TypeUser.NORMAL));
 
-			_repository.AddUser(
-				new AddUserDTO(
-					"Choi Siwon",
-					"siwon@email.com",
-					"134652",
-					"URLFOTO",
-					TypeUser.NORMAL));
+			await _repository.AddUserAsync(
+				new AddUserDTO("Choi Siwon", "siwon@email.com","134652", "URLFOTO", TypeUser.NORMAL));
 
-			_repository.AddUser(
-				new AddUserDTO(
-					"Shin Donghee",
-					"shindong@email.com",
-					"134652",
-					"URLFOTO",
-					TypeUser.NORMAL));
+			await _repository.AddUserAsync(
+				new AddUserDTO("Shin Donghee", "shindong@email.com", "134652", "URLFOTO", TypeUser.NORMAL));
 
 			//When searching full list
 			//Then, it should return 4 users
 			Assert.AreEqual(4, _context.Users.Count());
-
 		}
 
 		[TestMethod]
-		public  void GetUserByEmailReturnNotNull()
+		public async Task GetUserByEmailReturnNotNull()
 		{
 			// Defining context
 			var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
@@ -78,24 +57,18 @@ namespace BlogPessoalTeste.Tests.repositories
 			_repository = new UserRepository(_context);
 
 			// Given that I added an user into database
-
-			_repository.AddUser(
-				new AddUserDTO(
-				"Shin Donghee",
-				"shindong@email.com",
-				"134652",
-				"URLFOTO",
-				TypeUser.NORMAL));
+			await _repository.AddUserAsync(
+				new AddUserDTO("Shin Donghee", "shindong@email.com", "134652", "URLFOTO", TypeUser.NORMAL));
 
 			//When searching this user's email
-				var user = _repository.GetUserByEmail("shindong@email.com");
+				var user = await _repository.GetUserByEmailAsync("shindong@email.com");
 
 			//Then, it shuold return an user
 				Assert.IsNotNull(user);
 		}
 
 		[TestMethod]
-		public  void GetUserByIdReturnNotNullName()
+		public  async Task GetUserByIdReturnNotNullName()
 		{
 			// Defining context
 			var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
@@ -106,16 +79,11 @@ namespace BlogPessoalTeste.Tests.repositories
 			_repository = new UserRepository(_context);
 
 			// Given that I added an user into database
-			_repository.AddUser(
-				new AddUserDTO(
-					"Choi Siwon",
-					"siwon@email.com",
-					"134652",
-					"URLFOTO",
-					TypeUser.NORMAL));
+			await _repository.AddUserAsync(
+				new AddUserDTO("Choi Siwon", "siwon@email.com", "134652", "URLFOTO", TypeUser.NORMAL));
 
 			//When searching by id number 1
-			var user = _repository.GetUserById(1);
+			var user = await  _repository.GetUserByIdAsync(1);
 
 			//Then, it should return an user
 			Assert.IsNotNull(user);
@@ -125,7 +93,7 @@ namespace BlogPessoalTeste.Tests.repositories
 		}
 
 		[TestMethod]
-		public void UpdateUserReturnUpdatedUser()
+		public async Task UpdateUserReturnUpdatedUser()
 		{
 			// Defining context
 			var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
@@ -136,24 +104,17 @@ namespace BlogPessoalTeste.Tests.repositories
 				_repository = new UserRepository(_context);
 
 			// Given that I added an user into database
-				_repository.AddUser(
-						new AddUserDTO(
-						"Park Jungsoo",
-						"leeteuk@email.com",
-						"134652",
-						"URLFOTO",
-						TypeUser.NORMAL));
+			await _repository.AddUserAsync(
+				new AddUserDTO("Park Jungsoo", "leeteuk@email.com", "134652", "URLFOTO", TypeUser.NORMAL));
 
 			//When updating user's name and password
-			var old = _repository.GetUserByEmail("leeteuk@email.com");
-					_repository.UpdateUser(
-						new UpdateUserDTO(1,
-						"Park Leeteuk",
-						"123456",
-						"URLFOTONOVA"));
+			await _repository.UpdateUserAsync(
+				new UpdateUserDTO(1,"Park Leeteuk", "123456","URLNEWPHOTO"));
 
 			// Then, when we validate the search, it should return name Park Leeteuk
-				Assert.AreEqual("Park Leeteuk", _context.Users.FirstOrDefault(u => u.Id == old.Id).Name);
+			var old = await _repository.GetUserByEmailAsync("leeteuk@email.com");
+
+			Assert.AreEqual("Park Leeteuk", _context.Users.FirstOrDefault(u => u.Id == old.Id).Name);
 
 			// Then, when we validate the search, it should return password 123456
 			Assert.AreEqual("123456", _context.Users.FirstOrDefault(u => u.Id == old.Id).Password);

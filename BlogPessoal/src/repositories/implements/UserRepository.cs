@@ -1,8 +1,10 @@
 ﻿using BlogPessoal.src.data;
 using BlogPessoal.src.dtos;
 using BlogPessoal.src.models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlogPessoal.src.repositories.implements
 {
@@ -19,15 +21,17 @@ namespace BlogPessoal.src.repositories.implements
 
         public UserRepository(BlogPessoalContext context)
 
-        {_context = context; }
+        {
+            _context = context; 
+        }
 
         #endregion Constructors
 
         #region Methods
 
-        public void AddUser(AddUserDTO user)
+        public async Task AddUserAsync(AddUserDTO user)
         {
-            _context.Users.Add(new UserModel
+            await _context.Users.AddAsync(new UserModel
             {
                 Name = user.Name,
                 Email = user.Email,
@@ -35,42 +39,41 @@ namespace BlogPessoal.src.repositories.implements
                 Photo = user.Photo,
                 Type = user.Type
             });
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteUser(int id)
+        public async Task DeleteUserAsync(int id)
         {
-            _context.Users.Remove(GetUserById(id));
-            _context.SaveChanges();
+            _context.Users.Remove(await GetUserByIdAsync(id));
+            await _context.SaveChangesAsync();
         }
 
-        public UserModel GetUserByEmail(string email)
+        public async Task<UserModel> GetUserByEmailAsync(string email)
         {
-            return _context.Users.FirstOrDefault(u => u.Email == email);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public UserModel GetUserById(int id)
+        public async Task<UserModel> GetUserByIdAsync(int id)
         {
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
         }
 
-        public UserModel GetUserByName(string name)
+        public async Task<List<UserModel>> GetUserByNameAsync(string name)
         {
-            return _context.Users.FirstOrDefault(u => u.Name == name);
+            return await _context.Users
+                .Where(u => u.Name.Contains(name))
+                .ToListAsync();
         }
 
-        public void UpdateUser(UpdateUserDTO user)
+        public async Task UpdateUserAsync(UpdateUserDTO user)
         {
-            var oldUser = GetUserById(user.Id);
+            var oldUser = await GetUserByIdAsync(user.Id);
             oldUser.Name = user.Name;
             oldUser.Password = user.Password;
             oldUser.Photo = user.Photo;
             _context.Users.Update(oldUser);
-            _context.SaveChanges();
-        }
-        List<UserModel> IUser.GetUserByName(string user)
-        {
-            return _context.Users.ToList();
+           await  _context.SaveChangesAsync();
         }
         #endregion Methods
     }
