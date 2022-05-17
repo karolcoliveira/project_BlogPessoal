@@ -37,8 +37,9 @@ namespace BlogPessoal.src.dtos
         }
     }
 
+
     /// <summary>
-    /// <para>Sumary: Mirror class to update an user</para>
+    /// <para>Sumary: Mirror class to update a user</para>
     /// <para>Created by: Karol Oliveira</para>
     /// <para>Version: 1.0</para>
     /// <para>Date: 29/04/2022</para>

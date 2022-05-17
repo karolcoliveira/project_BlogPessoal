@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BlogPessoal.src.repositories
-{ /// <summary>
-   /// <para>Sumary: Interface to represent CRUD actions in posts</para>
-   /// <para>Created by: Karol Oliveira</para>
-   /// <para>Version: 1.0</para>
-   /// <para>Date: 29/04/2022</para>
-   /// </summary>
+{ 
+/// <summary>
+/// <para>Sumary: Interface to represent CRUD actions in posts</para>
+/// <para>Created by: Karol Oliveira</para>
+/// <para>Version: 1.0</para>
+/// <para>Date: 29/04/2022</para>
+/// </summary>
 public interface IPost
     {
         Task AddPostAsync(AddPostDTO post);

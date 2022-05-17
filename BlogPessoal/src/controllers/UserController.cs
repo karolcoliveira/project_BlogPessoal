@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using BlogPessoal.src.dtos;
 using BlogPessoal.src.repositories;
 using BlogPessoal.src.services;
 using Microsoft.AspNetCore.Authorization;
-using BlogPessoal.src.utilities;
+using Microsoft.AspNetCore.Http;
+using BlogPessoal.src.models;
 
 namespace BlogPessoal.src.controllers
 {
@@ -34,6 +34,30 @@ namespace BlogPessoal.src.controllers
 
         #region Methods
 
+        /// <summary>
+        /// Create new User
+        /// </summary>
+        /// <param name="user">AddUserDTO</param>
+        /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Request example:
+        ///
+        /// POST /api/Users
+        /// {
+        /// "name": "Choi Siwon",
+        /// "email": "siwon@domain.com",
+        /// "password": "134652",
+        /// "photo": "URLPHOTO",
+        /// "type": "NORMAL"
+        /// }
+        ///
+        /// </remarks>
+        /// <response code="201">Return created user</response>
+        /// <response code="400">Request error</response>
+        /// <response code="401">Email already registered</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UserModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> AddUser([FromBody] AddUserDTO user)
@@ -52,6 +76,27 @@ namespace BlogPessoal.src.controllers
         }
 
 
+        /// <summary>
+        /// Update User
+        /// </summary>
+        /// <param name="user">UpdateDTOUser</param>
+        /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Request example:
+        ///
+        /// PUT /api/Users
+        /// {
+        /// "id": 1,
+        /// "name": "Siwon Choi",
+        /// "password": "134652",
+        /// "photo": "URLUPDATEDPHOTO"
+        /// }
+        ///
+        /// </remarks>
+        /// <response code="200">Return updated user</response>
+        /// <response code="400">Request error</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         [Authorize(Roles = "NORMAL,ADMINISTRATOR")]
         public async Task<ActionResult> UpdateUser([FromBody] UpdateUserDTO user)
@@ -65,6 +110,13 @@ namespace BlogPessoal.src.controllers
         }
 
 
+        /// <summary>
+        /// Delete user by Id
+        /// </summary>
+        /// <param name="idUser">int</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="204">User deleted</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("delete/{idUser}")]
         [Authorize(Roles ="ADMINISTRATOR")]
         public async Task<ActionResult> DeleteUser([FromRoute] int idUser)
@@ -74,6 +126,15 @@ namespace BlogPessoal.src.controllers
         }
 
 
+        /// <summary>
+        /// Get user by Id
+        /// </summary>
+        /// <param name="iduser">int</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Returns the user</response>
+        /// <response code="404">User does not exist</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id/{user}")]
         [Authorize(Roles = "NORMAL,ADMINISTRATOR")]
         public async Task<ActionResult> GetUserByIdAsync([FromRoute] int iduser)
@@ -85,6 +146,15 @@ namespace BlogPessoal.src.controllers
         }
 
 
+        /// <summary>
+        /// Get user by name
+        /// </summary>
+        /// <param name="nameUser">string</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Returns the user</response>
+        /// <response code="204">Name does not exist</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
         [Authorize(Roles = "NORMAL,ADMINISTRATOR")]
         public async Task<ActionResult> GetUserByNameAsync([FromQuery] string nameUser)
@@ -95,6 +165,15 @@ namespace BlogPessoal.src.controllers
         }
 
 
+        /// <summary>
+        /// Get user by Email
+        /// </summary>
+        /// <param name="emailUser">string</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Returns the user</response>
+        /// <response code="404">Email does not exist</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("email/{emailUser}")]
         [Authorize(Roles = "NORMAL, ADMINISTRATOR")]
         public async Task<ActionResult> GetUserByEmailAsync([FromRoute] string emailUser)

@@ -36,9 +36,9 @@ namespace BlogPessoalTeste.Tests.data
             user.Photo = "AKITAOLINKDAFOTO";
             user.Type = TypeUser.NORMAL;
 
-            _context.Users.Add(user); // Adicionando usuario
+            _context.Users.Add(user); // Add user
 
-            _context.SaveChanges(); // Commita criação
+            _context.SaveChanges(); // Save changes
 
             Assert.IsNotNull(_context.Users.FirstOrDefault(u => u.Email == "karol@email.com"));
 

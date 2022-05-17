@@ -4,11 +4,12 @@ using BlogPessoal.src.dtos;
 using System.Threading.Tasks;
 
 namespace BlogPessoal.src.repositories
-{/// <summary>
+{
+/// <summary>
 /// <para>Sumary: Interface to represent CRUD actions in themes</para>
-/// <para>Criado por: Karol Oliveira</para>
-/// <para>Versão: 1.0</para>
-/// <para>Data: 29/04/2022</para>
+/// <para>Created by: Karol Oliveira</para>
+/// <para>Version: 1.0</para>
+/// <para>Date: 29/04/2022</para>
 /// </summary>
     public interface ITheme
     { 

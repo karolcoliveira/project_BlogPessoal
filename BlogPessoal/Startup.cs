@@ -13,6 +13,14 @@ using Microsoft.EntityFrameworkCore;
 using BlogPessoal.src.data;
 using BlogPessoal.src.repositories;
 using BlogPessoal.src.repositories.implements;
+using BlogPessoal.src.services;
+using BlogPessoal.src.services.implements;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace BlogPessoal
 {
@@ -28,7 +36,7 @@ namespace BlogPessoal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configuração Banco
+            // Configuraï¿½ï¿½o Banco
             IConfigurationRoot config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
@@ -44,6 +52,64 @@ namespace BlogPessoal
             // Controladores
             services.AddCors();
             services.AddControllers();
+
+            // Configuraï¿½ï¿½o de Serviï¿½os
+            services.AddScoped<IAuthentication, AuthenticationServices>();
+
+            // Configuraï¿½ï¿½o do Token Autenticaï¿½ï¿½o JWTBearer
+            var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
+            services.AddAuthentication(a =>
+            {
+                a.DefaultAuthenticateScheme =
+                JwtBearerDefaults.AuthenticationScheme;
+                a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(b =>
+            {
+                b.RequireHttpsMetadata = false;
+                b.SaveToken = true;
+                b.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(chave),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+        
+            // ConfiguraÃ§Ã£o Swagger
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog Pessoal", Version = "v1" });
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT authorization header utiliza: Bearer + JWT Token",
+                });
+
+                s.AddSecurityRequirement( new OpenApiSecurityRequirement
+                {
+                    { 
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new List<string>()
+                    }
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                s.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,11 +118,13 @@ namespace BlogPessoal
             // Ambiente de desenvolvimento
             if (env.IsDevelopment())
             {
-                context.Database.EnsureCreated();
-                app.UseDeveloperExceptionPage();
+            context.Database.EnsureCreated();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1"));
             }
 
-            // Ambiente de produção
+            // Ambiente de produï¿½ï¿½o
             //Rotas
             app.UseRouting();
             app.UseCors(c => c
@@ -64,6 +132,9 @@ namespace BlogPessoal
             .AllowAnyMethod()
             .AllowAnyHeader());
 
+            // Autenticaï¿½ï¿½o e Autorizaï¿½ï¿½o
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

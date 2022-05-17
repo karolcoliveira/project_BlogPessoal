@@ -29,6 +29,10 @@ namespace BlogPessoal.src.repositories.implements
 
         #region Methods
 
+        /// <summary>
+        /// <para>Summary: Asynchronous method to add a new user</para>
+        /// </summary>
+        /// <param name="user">AddUserDTO</param>
         public async Task AddUserAsync(AddUserDTO user)
         {
             await _context.Users.AddAsync(new UserModel
@@ -42,23 +46,42 @@ namespace BlogPessoal.src.repositories.implements
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Summary: Asynchronous method to delete an user</para>
+        /// </summary>
+        /// <param name="id">User ID</param>
         public async Task DeleteUserAsync(int id)
         {
             _context.Users.Remove(await GetUserByIdAsync(id));
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Summary: Asynchronous method to get a user by email</para>
+        /// </summary>
+        /// <param name="email">User email</param>
+        /// <return>UserModel</return>
         public async Task<UserModel> GetUserByEmailAsync(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        /// <summary>
+         /// <para>Sumary: Asynchronous method to get a user by Id</para>
+         /// </summary>
+         /// <param name="id">User ID</param>
+         /// <return>UserModel</return>
         public async Task<UserModel> GetUserByIdAsync(int id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
         }
 
+        /// <summary>
+         /// <para>Summary: Asynchronous method to get users by name</para>
+         /// </summary>
+         /// <param name="name">Username</param>
+         /// <return>UserModel List</return>
         public async Task<List<UserModel>> GetUserByNameAsync(string name)
         {
             return await _context.Users
@@ -66,6 +89,10 @@ namespace BlogPessoal.src.repositories.implements
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// <para>Summary: Asynchronous method to update a user</para>
+        /// </summary>
+        /// <param name="user">UpdateUserDTO</param>
         public async Task UpdateUserAsync(UpdateUserDTO user)
         {
             var oldUser = await GetUserByIdAsync(user.Id);

@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlogPessoal</name>
+    </assembly>
+    <members>
+        <member name="M:BlogPessoal.src.controllers.UserController.AddUser(BlogPessoal.src.dtos.AddUserDTO)">
+             <summary>
+             Create new User
+             </summary>
+             <param name="user">AddUserDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Request example:
+            
+             POST /api/Users
+             {
+             "name": "Choi Siwon",
+             "email": "siwon@domain.com",
+             "password": "134652",
+             "photo": "URLFOTO",
+             "type": "NORMAL"
+             }
+            
+             </remarks>
+             <response code="201">Return created user</response>
+             <response code="400">Request error</response>
+             <response code="401">Email already registered</response>
+        </member>
+        <member name="M:BlogPessoal.src.controllers.UserController.UpdateUser(BlogPessoal.src.dtos.UpdateUserDTO)">
+             <summary>
+             Update User
+             </summary>
+             <param name="user">UpdateDTOUser</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Request example:
+            
+             PUT /api/Users
+             {
+             "id": 1,
+             "name": "Choi Siwon",
+             "password": "134652",
+             "photo": "URLFOTO"
+             }
+            
+             </remarks>
+             <response code="200">Return updated user</response>
+             <response code="400">Request error</response>
+        </member>
+        <member name="M:BlogPessoal.src.controllers.UserController.DeleteUser(System.Int32)">
+            <summary>
+            Delete user by Id
+            </summary>
+            <param name="idUser">int</param>
+            <returns>ActionResult</returns>
+            <response code="204">User deleted</response>
+        </member>
+        <member name="M:BlogPessoal.src.controllers.UserController.GetUserByIdAsync(System.Int32)">
+            <summary>
+            Get user by Id
+            </summary>
+            <param name="iduser">int</param>
+            <returns>ActionResult</returns>
+            <response code="200">Returns the user</response>
+            <response code="404">User does not exist</response>
+        </member>
+        <member name="M:BlogPessoal.src.controllers.UserController.GetUserByNameAsync(System.String)">
+            <summary>
+            Get user by name
+            </summary>
+            <param name="nameUser">string</param>
+            <returns>ActionResult</returns>
+            <response code="200">Returns the user</response>
+            <response code="204">Name does not exist</response>
+        </member>
+        <member name="M:BlogPessoal.src.controllers.UserController.GetUserByEmailAsync(System.String)">
+            <summary>
+            Get user by Email
+            </summary>
+            <param name="emailUser">string</param>
+            <returns>ActionResult</returns>
+            <response code="200">Returns the user</response>
+            <response code="404">Email does not exist</response>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.AddPostDTO">
+            <summary>
+            <para>Sumary: Mirror class to add a new post</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.UpdatePostDTO">
+            <summary>
+            <para>Sumary: Mirror class to update a theme</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.AddThemeDTO">
+            <summary>
+            <para>Sumary: Mirror class to add a new theme</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.UpdateThemeDTO">
+            <summary>
+            <para>Sumary: Mirror class to update a theme</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.AddUserDTO">
+            <summary>
+            <para>Sumary: Mirror class to add a new user</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.UpdateUserDTO">
+            <summary>
+            <para>Sumary: Mirror class to update an user</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.models.PostModel">
+            <summary>
+            <para>Resume: Class responsible for representing tb_posts in the database.</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 05/12/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.models.ThemeModel">
+            <summary>
+            <para>Resume: Class responsible for representing tb_themes in the database.</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 05/12/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.models.UserModel">
+            <summary>
+            <para>Resume: Class responsible for representing tb_users in the database.</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 05/12/2022</para>
+            </summary>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.ThemeRepository.AddThemeAsync(BlogPessoal.src.dtos.AddThemeDTO)">
+            <summary>
+            <para>Summary: Asynchronous method to add a new theme</para>
+            </summary>
+            <param name="theme">AddThemeDTO</param>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.ThemeRepository.DeleteThemeAsync(System.Int32)">
+            <summary>
+            <para>Summary: Asynchronous method to delete a theme</para>
+            </summary>
+            <param name="id"> ID</param>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.ThemeRepository.GetAllThemesAsync">
+            <summary>
+            <para>Summary: Asynchronous method to get all themes</para>
+            </summary>
+            <return>ThemeModel List</return>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.ThemeRepository.GetThemeByDescriptionAsync(System.String)">
+            <summary>
+            <para>Summary: Asynchronous method to get themes by description</para>
+            </summary>
+            <param name="description">Description</param>
+            <return>ThemeModel List</return>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.ThemeRepository.GetThemeByIdAsync(System.Int32)">
+            <summary>
+            <para>Sumary: Asynchronous method to get a theme by Id</para>
+            </summary>
+            <param name="id">User ID</param>
+            <return>ThemeModel</return>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.ThemeRepository.UpdateThemeAsync(BlogPessoal.src.dtos.UpdateThemeDTO)">
+            <summary>
+            <para>Summary: Asynchronous method to update a theme</para>
+            </summary>
+            <param name="theme">UpdateThemeDTO</param>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.UserRepository.AddUserAsync(BlogPessoal.src.dtos.AddUserDTO)">
+            <summary>
+            <para>Summary: Asynchronous method to add a new user</para>
+            </summary>
+            <param name="user">AddUserDTO</param>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.UserRepository.DeleteUserAsync(System.Int32)">
+            <summary>
+            <para>Summary: Asynchronous method to delete an user</para>
+            </summary>
+            <param name="id">User ID</param>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.UserRepository.GetUserByEmailAsync(System.String)">
+            <summary>
+            <para>Summary: Asynchronous method to get a user by email</para>
+            </summary>
+            <param name="email">User email</param>
+            <return>UserModel</return>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.UserRepository.GetUserByIdAsync(System.Int32)">
+            <summary>
+            <para>Sumary: Asynchronous method to get a user by Id</para>
+            </summary>
+            <param name="id">User ID</param>
+            <return>UserModel</return>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.UserRepository.GetUserByNameAsync(System.String)">
+            <summary>
+            <para>Summary: Asynchronous method to get users by name</para>
+            </summary>
+            <param name="name">Username</param>
+            <return>UserModel List</return>
+        </member>
+        <member name="M:BlogPessoal.src.repositories.implements.UserRepository.UpdateUserAsync(BlogPessoal.src.dtos.UpdateUserDTO)">
+            <summary>
+            <para>Summary: Asynchronous method to update a user</para>
+            </summary>
+            <param name="user">UpdateUserDTO</param>
+        </member>
+        <member name="T:BlogPessoal.src.repositories.IPost">
+            <summary>
+            <para>Sumary: Interface to represent CRUD actions in posts</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.repositories.ITheme">
+            <summary>
+            <para>Sumary: Interface to represent CRUD actions in themes</para>
+            <para>Criado por: Karol Oliveira</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.repositories.IUser">
+            <summary>
+            <para>Sumary: Interface to represent CRUD actions in users</para>
+            <para>Created by: Karol Oliveira</para>
+            <para>Version: 1.0</para>
+            <para>Date: 29/04/2022</para>
+            </summary>
+        </member>
+    </members>
+</doc>

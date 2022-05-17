@@ -6,7 +6,9 @@ C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPes
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\BlogPessoal.runtimeconfig.dev.json
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\BlogPessoal.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\BlogPessoal.pdb
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\BlogPessoal.xml
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Humanizer.dll
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -20,7 +22,10 @@ C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPes
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
-C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
@@ -43,6 +48,7 @@ C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPes
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.AssemblyInfoInputs.cache
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.AssemblyInfo.cs
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.csproj.CoreCompileInputs.cache
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\scopedcss\bundle\BlogPessoal.styles.css
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\staticwebassets\BlogPessoal.StaticWebAssets.Manifest.cache
@@ -50,6 +56,7 @@ C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPes
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.csproj.CopyComplete
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.dll
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\refint\BlogPessoal.dll
+C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.xml
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.pdb
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.genruntimeconfig.cache
 C:\Users\olive\OneDrive\Documentos\DOTNETGen\Git\BlogPessoal\BlogPessoal\BlogPessoal\obj\Debug\net5.0\ref\BlogPessoal.dll

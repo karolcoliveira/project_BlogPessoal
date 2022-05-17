@@ -115,6 +115,7 @@ namespace BlogPessoalTeste.Tests.repositories
                     "Super Junior is so cool",
                     "They stil dance and sing just like 2005",
                     "URLUPDATEDPHOTO",
+                    "haefish@email.com",
                     "Suju"));
 
             var post = await _repositoryP.GetPostByIdAsync(1);

@@ -20,7 +20,7 @@ namespace BlogPessoal.src.controllers
 
         #region Methods
 
-        [HttpGet]
+        [HttpGet("list")]
         [Authorize]
         public async Task<ActionResult> GetAllThemesAsync()
         {
@@ -38,7 +38,7 @@ namespace BlogPessoal.src.controllers
             return Ok(theme);
         }
 
-        [HttpGet]
+        [HttpGet("description")]
         [Authorize]
         public async Task<ActionResult> GetThemeByDescriptionAsync([FromQuery] string descriptionTheme)
         {

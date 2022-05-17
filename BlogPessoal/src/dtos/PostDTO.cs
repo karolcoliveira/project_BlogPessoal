@@ -2,12 +2,13 @@
 using BlogPessoal.src.dtos;
 
 namespace BlogPessoal.src.dtos
-{/// <summary>
-/// <para>Sumary: Mirror class to add a new post</para>
-/// <para>Created by: Karol Oliveira</para>
-/// <para>Version: 1.0</para>
-/// <para>Date: 29/04/2022</para>
-/// </summary>
+{
+    /// <summary>
+    /// <para>Sumary: Mirror class to add a new post</para>
+    /// <para>Created by: Karol Oliveira</para>
+    /// <para>Version: 1.0</para>
+    /// <para>Date: 29/04/2022</para>
+    /// </summary>
     public class AddPostDTO
     {
         [Required]
@@ -36,6 +37,8 @@ namespace BlogPessoal.src.dtos
             DescriptionTheme = descriptionTheme;
         }
     }
+
+
     /// <summary>
     /// <para>Sumary: Mirror class to update a theme</para>
     /// <para>Created by: Karol Oliveira</para>
@@ -69,10 +72,6 @@ namespace BlogPessoal.src.dtos
             Photo = photo;
             EmailCreator = emailCreator;
             DescriptionTheme = descriptionTheme;
-        }
-
-        public UpdatePostDTO(int v1, string v2, string v3, string v4, string v5)
-        {
         }
     }
 }
