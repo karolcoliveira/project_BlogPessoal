@@ -36,13 +36,20 @@ namespace BlogPessoal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configura��o Banco
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            // Configuraçãp Banco de Dados
+            if (Configuration["Enviroment:Start"] == "PROD")
+            {
+                services.AddEntityFrameworkNpgsql()
+                .AddDbContext<BlogPessoalContext>(
+                opt =>
+                opt.UseNpgsql(Configuration["ConnectionStringsProd:DefaultConnection"]));
+            }
+            else
+{
+                services.AddDbContext<BlogPessoalContext>(
+                opt =>
+                opt.UseSqlServer(Configuration["ConnectionStringsDev:DefaultConnection"]));
+            }
 
             // Repositorios
             services.AddScoped<IUser, UserRepository>();
@@ -123,6 +130,15 @@ namespace BlogPessoal
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1"));
             }
+
+            // Ambiente de produção
+            context.Database.EnsureCreated();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1");
+                c.RoutePrefix = string.Empty;
+            });
 
             // Ambiente de produ��o
             //Rotas

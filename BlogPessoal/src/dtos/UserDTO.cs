@@ -11,8 +11,6 @@ namespace BlogPessoal.src.dtos
     /// </summary>
     public class AddUserDTO
     {
-        private (string, string, string, string) p;
-
         [Required, StringLength(50)]
         public string Name { get; set; }
 
