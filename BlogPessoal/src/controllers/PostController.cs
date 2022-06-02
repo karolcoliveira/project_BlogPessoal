@@ -29,14 +29,13 @@ namespace BlogPessoal.src.controllers
 
         #region Methods
 
-
         /// <summary>
         /// Get post by Id
+        /// </summary>
         /// <param name = "idPost">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Return to post</response>
         /// <response code="404">Post does not exist</response>
-        /// </summary>
         [HttpGet("id/{idPost}")]
         [Authorize]
         public async Task<ActionResult> GetPostByIdAsync([FromRoute] int idPost)
@@ -45,8 +44,8 @@ namespace BlogPessoal.src.controllers
             if (post == null) return NotFound();
             return Ok(post);
         }
- 
-
+        
+        
         /// <summary>
         /// Get all posts
         /// </summary>
